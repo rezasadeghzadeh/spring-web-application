@@ -10,6 +10,10 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.stereotype.Controller;
 
 import ir.sadeghzadeh.Application;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+
+import java.io.IOException;
 
 @Configuration
 @PropertySource("classpath:persistence.properties")
@@ -20,5 +24,10 @@ class ApplicationConfig {
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
-	
+
+    @Bean
+    public MultipartResolver multipartResolver() throws IOException {
+        return new StandardServletMultipartResolver();
+    }
+
 }

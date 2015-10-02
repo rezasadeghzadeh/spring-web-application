@@ -3,6 +3,9 @@ package ir.sadeghzadeh.signup;
 import org.hibernate.validator.constraints.*;
 
 import ir.sadeghzadeh.account.Account;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.NotNull;
 
 public class SignupForm {
 
@@ -16,6 +19,8 @@ public class SignupForm {
     @NotBlank(message = SignupForm.NOT_BLANK_MESSAGE)
 	private String password;
 
+    @NotNull
+    private MultipartFile picture;
     public String getEmail() {
 		return email;
 	}
@@ -35,4 +40,12 @@ public class SignupForm {
 	public Account createAccount() {
         return new Account(getEmail(), getPassword(), "ROLE_USER");
 	}
+
+    public MultipartFile getPicture() {
+        return picture;
+    }
+
+    public void setPicture(MultipartFile picture) {
+        this.picture = picture;
+    }
 }

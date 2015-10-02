@@ -9,7 +9,7 @@
     <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<form class="form-narrow form-horizontal" method="post" th:action="@{/signup}" th:object="${signupForm}">
+<form class="form-narrow form-horizontal" method="post" th:action="@{/signup}" th:object="${signupForm}" enctype="multipart/form-data">
     <!--/* Show general error message when form contains errors */-->
     <th:block th:if="${#fields.hasErrors('${signupForm.*}')}">
         <div th:replace="fragments/alert :: alert (type='danger', message='Form contains errors. Please try again.')">Alert</div>
@@ -28,6 +28,13 @@
             <div class="col-lg-10">
                 <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}"/>
                 <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect password</span>
+            </div>
+        </div>
+        <div class="form-group" th:classappend="${#fields.hasErrors('picture')} ? 'has-error'">
+            <label for="picture" class="col-lo-2 control-label">Profile Picture</label>
+            <div class="col-lg-10">
+                <input  type="file"  accept="image/jpeg,image/png,image/gif" class="form-control" id="picture" placeholder="Your Profile Picture " th:field="*{picture}" />
+                <span class="help-block" th:if="${#fields.hasErrors('picture')}" th:errors="*{email}">Incorrect Picture</span>
             </div>
         </div>
         <div class="form-group">
